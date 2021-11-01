@@ -1,11 +1,8 @@
-from datetime import datetime
 import calendar
-
-time = datetime.now()
-#colors.dispAll()
+from time_constants import DAY, MONTH, YEAR
 
 #Get the weeks of the month, which contain the days of the month
-cal = calendar.monthcalendar(time.year, time.month)
+cal = calendar.monthcalendar(YEAR, MONTH)
 
 monthNames = ("January",
               "February",
@@ -23,25 +20,28 @@ monthNames = ("January",
 def getMonthName(index):
     return monthNames[index-1]
 
-def prevMonth(startingMonth = time.month):
-    month = startingMonth-1
-    if (month < 1):
-        month = 12
-    return month
+def prevMonth(startingMonth = MONTH):
+    m = startingMonth-1
+    if (m < 1):
+        m = 12
+    return m
 
-def nextMonth(startingMonth = time.month):
-    month = startingMonth+1
-    if (month > 12):
-        month = 1
-    return month
-
-def replaceAll(list, oldItem, newItem):
-    for i in range(len(list)):
-        if (list[i] == oldItem):
-            list[i] = newItem
+def nextMonth(startingMonth = MONTH):
+    m = startingMonth+1
+    if (m > 12):
+        m = 1
+    return m
     
-def combine(list1, list2):
+def combine(list1, list2, monthsList = [True]*7):
     for i in range(len(list1)):
         if (list1[i] == 0):
             list1[i] = list2[i]
-        
+            monthsList[i] = False
+
+def digitalTimeFormat(n):
+    if (n < 10):
+        n = "0"+str(n)
+    return str(n)
+
+def unpackListOfTuples(list):
+    return tuple(zip(*list))

@@ -1,17 +1,22 @@
 class baseColors:
 
     HEADER    = '\033[95m'
-    BLUE      = '\033[94m'
-    CYAN      = '\033[96m'
-    GREEN     = '\033[92m'
     YELLOW    = '\033[93m'
-    RED       = '\033[91m'
+    LRED      = '\033[91m'
+    BLUE      = '\033[34m'
+    PURPLE    = '\033[35m'
+    CYAN      = '\033[36m'
+    GREEN     = '\033[32m'
+    GOLD      = '\033[33m'
+    RED       = '\033[31m'
     GREY      = '\033[90m'
     BLACK     = '\033[30m'
     NONE      = '\033[0m'
     WHITE     = '\033[29m'
     BOLD      = '\033[1m'
     UNDERLINE = '\033[4m'
+    
+
 
     HRED      = '\033[41m'
     HGREEN    = '\033[42m'
@@ -44,3 +49,6 @@ class colors(baseColors):
     HIGHLIGHT       = baseColors.BLACK+baseColors.HWHITE
     HIGHLIGHT_RED   = baseColors.BLACK+baseColors.RED
     HIGHLIGHT_BLUE  = baseColors.WHITE+baseColors.BLUE
+    EVENT_UPCOMING  = baseColors.WHITE+baseColors.HBLUE+baseColors.BOLD
+    EVENT_SOON      = baseColors.WHITE+baseColors.HPURPLE+baseColors.BOLD
+    EVENT_NOW       = baseColors.WHITE+baseColors.HRED+baseColors.BOLD
