@@ -25,16 +25,25 @@ def getUpcomingEvents(dayRange):
             currentMonth = nextMonth(currentMonth)
             if (currentMonth == 1):
                 currentYear += 1 
-            daysInMonth = calendar.monthrange(YEAR, currentMonth)[1]
+            daysInMonth = calendar.monthrange(currentYear, currentMonth)[1]
     return eventsList
 
 def getTimeUntil(e):
+    #Get the date and time
     dt = e.getDate()
     tt = e.getStart()
+
+    #Use the date and time to get the future
     future = datetime(dt.getYear(), dt.getMonth(), dt.getDay(), tt.getHour(), tt.getMin(), 00)
+
+    #Use the current time to get the current time
     now = datetime(YEAR, MONTH, DAY, HOUR, MINUTE, SECOND)
+
+    #And get the time between the future and the current date.
     dur = int((future-now).total_seconds())
 
+    #Get the days, hours, and minutes remaining until that event.
+    #(3600 seconds in an hour, 60 seconds in a minute)
     daysUntil    = int(dur / (3600*24))
     dur -= (3600*24)*daysUntil
     hoursUntil   = int(dur / 3600)
@@ -48,29 +57,36 @@ def generateHeader(headerText, e):
     whitespace = "⠀" * (EVENTS_DISPLAY_LENGTH-len(display))
     return display+whitespace
 
-def displayUpcomingEvents():
-    eventDays = getUpcomingEvents(EVENTS_DISPLAY_RANGE)
+
+def displayEvent(e):
+    daysUntil, hoursUntil, minutesUntil = getTimeUntil(e)
+
+    #Header
+    if (daysUntil == 0):
+        print(colors.EVENT_NOW + generateHeader("TODAY: ",e) + colors.NONE)
+    elif (daysUntil < 2):
+        print(colors.EVENT_SOON+ generateHeader("SOON: ",e) + colors.NONE)
+    else:
+        print(colors.EVENT_UPCOMING + generateHeader("UPCOMING: ",e) + colors.NONE)
+
+    #Date and time
+    print(e.getDate().getDate() + "   " + e.getStart().getTime()+" - "+e.getEnd().getTime())
+    
+    #How long until it is until the event
+    if (minutesUntil < 0 or hoursUntil < 0 or daysUntil < 0):
+        print(colors.GOLD+colors.UNDERLINE+"ON NOW!"+colors.NONE)
+    elif (daysUntil == 0):
+        print(colors.RED+str(hoursUntil)  + " hours, " + str(minutesUntil) + " minutes"+colors.NONE)
+    elif (daysUntil < 2):
+        print(colors.PURPLE+str(daysUntil)  + " day, " + str(hoursUntil) + " hours, " + str(minutesUntil) + " minutes"+colors.NONE)
+    else:
+        print(colors.WHITE+str(daysUntil) + " days"+colors.NONE)
+
+    print()
+
+#Display all events within a certain time range.
+def displayUpcomingEvents(dayRange):
+    eventDays = getUpcomingEvents(dayRange)
     for event in eventDays:
         for e in event:
-            daysUntil, hoursUntil, minutesUntil = getTimeUntil(e)
-
-            #Header
-            if (daysUntil == 0):
-                print(colors.EVENT_NOW + generateHeader("TODAY: ",e) + colors.NONE)
-            elif (daysUntil < 3):
-                print(colors.EVENT_SOON+ generateHeader("SOON: ",e) + colors.NONE)
-            else:
-                print(colors.EVENT_UPCOMING + generateHeader("UPCOMING: ",e) + colors.NONE)
-
-            #Date and time
-            print(e.getDate().getDate() + "   " + e.getStart().getTime()+" - "+e.getEnd().getTime())
-            
-            #How long until it is until the event
-            if (daysUntil == 0):
-                print(colors.RED+str(hoursUntil)  + " hours, " + str(minutesUntil) + " minutes"+colors.NONE)
-            elif (daysUntil < 3):
-                print(colors.PURPLE+str(daysUntil)  + " days, " + str(hoursUntil) + " hours, " + str(minutesUntil) + " minutes"+colors.NONE)
-            else:
-                print(colors.BLUE+str(daysUntil) + " days"+colors.NONE)
-
-            print()
+            displayEvent(e)

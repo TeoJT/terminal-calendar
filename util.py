@@ -45,3 +45,14 @@ def digitalTimeFormat(n):
 
 def unpackListOfTuples(list):
     return tuple(zip(*list))
+
+def processDay(day, month, year):
+    daysInMonth = calendar.monthrange(year, month)[1]
+    if (day > daysInMonth):
+        day -= daysInMonth-1
+        month += 1
+
+    if (month > 12):
+        year += 1
+
+    return day, month, year

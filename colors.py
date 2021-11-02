@@ -49,6 +49,6 @@ class colors(baseColors):
     HIGHLIGHT       = baseColors.BLACK+baseColors.HWHITE
     HIGHLIGHT_RED   = baseColors.BLACK+baseColors.RED
     HIGHLIGHT_BLUE  = baseColors.WHITE+baseColors.BLUE
-    EVENT_UPCOMING  = baseColors.WHITE+baseColors.HBLUE+baseColors.BOLD
+    EVENT_UPCOMING  = baseColors.BLACK+baseColors.HWHITE+baseColors.BOLD
     EVENT_SOON      = baseColors.WHITE+baseColors.HPURPLE+baseColors.BOLD
     EVENT_NOW       = baseColors.WHITE+baseColors.HRED+baseColors.BOLD
