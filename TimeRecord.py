@@ -1,3 +1,4 @@
+from InvalidData import InvalidData
 from util import digitalTimeFormat
 
 class TimeRecord:
@@ -7,8 +8,21 @@ class TimeRecord:
         self.hours   = 0
 
     def setFromString(self, string):
-        self.hours = int(string[0:2])
-        self.minutes   = int(string[3:5])
+        try:
+            self.hours = int(string[0:2])
+            self.minutes   = int(string[3:5])
+        except ValueError:
+            raise InvalidData
+
+        if (self.hours > 23):
+            raise InvalidData
+        if (self.hours < 0):
+            raise InvalidData
+        if (self.minutes > 59):
+            raise InvalidData
+        if (self.minutes < 0):
+            raise InvalidData
+
         return self
 
     def setTime(self, hr, min):

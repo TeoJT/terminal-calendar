@@ -31,6 +31,20 @@ def addToCSV(row):
     csvWriter.writerow(row)
     file.close()
 
+def deleteRow(row):
+    with open(CSV_FILENAME, "r") as f:
+        lines = f.readlines()
+    with open(CSV_FILENAME, "w") as f:
+        for line in lines:
+            if line.strip("\n") != row:
+                f.write(line)
+    f.close()
+        
+
+
+
+
+
 #Loads everything into the variable eventDay
 def loadFromCSV():
     file = open(CSV_FILENAME, "r")

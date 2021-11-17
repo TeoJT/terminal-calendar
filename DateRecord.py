@@ -1,4 +1,5 @@
-from util import digitalTimeFormat
+from InvalidData import InvalidData
+from util import digitalTimeFormat, getDaysInMonth
 
 class DateRecord:
 
@@ -8,9 +9,27 @@ class DateRecord:
         self.year   = 0
 
     def setFromString(self, string):
-        self.day    = int(string[0:2])
-        self.month  = int(string[3:5])
-        self.year   = int(string[6:10])
+        try:
+            if (len(string) == 8):
+                self.day    = int(string[0:2])
+                self.month  = int(string[3:5])
+                self.year   = 2000+int(string[6:8])
+            else:
+                self.day    = int(string[0:2])
+                self.month  = int(string[3:5])
+                self.year   = int(string[6:10])
+        except ValueError:
+            raise InvalidData
+
+        if (self.year < 2000 or self.year > 9999):
+            raise InvalidData
+
+        if (self.month < 1 or self.month > 12):
+            raise InvalidData
+
+        if (self.day < 1 or self.day > getDaysInMonth(self.month, self.year)):
+            raise InvalidData
+            
         return self
 
     def setDate(self, day, month, year):

@@ -52,3 +52,4 @@ class colors(baseColors):
     EVENT_UPCOMING  = baseColors.BLACK+baseColors.HWHITE+baseColors.BOLD
     EVENT_SOON      = baseColors.WHITE+baseColors.HPURPLE+baseColors.BOLD
     EVENT_NOW       = baseColors.WHITE+baseColors.HRED+baseColors.BOLD
+    EVENT_ENDED     = baseColors.GREY+baseColors.HWHITE+baseColors.BOLD

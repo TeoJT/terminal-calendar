@@ -46,8 +46,11 @@ def digitalTimeFormat(n):
 def unpackListOfTuples(list):
     return tuple(zip(*list))
 
+def getDaysInMonth(month, year):
+    return calendar.monthrange(year, month)[1]
+
 def processDay(day, month, year):
-    daysInMonth = calendar.monthrange(year, month)[1]
+    daysInMonth = getDaysInMonth(month, year)
     if (day > daysInMonth):
         day -= daysInMonth-1
         month += 1
