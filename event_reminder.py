@@ -98,8 +98,8 @@ def displayEvent(e):
     return eventPassed
 
 #Display all events within a certain time range.
-def displayUpcomingEvents():
-    eventDays = getUpcomingEvents(EVENTS_DISPLAY_RANGE)
+def displayUpcomingEvents(eventRange=EVENTS_DISPLAY_RANGE):
+    eventDays = getUpcomingEvents(eventRange)
     for event in eventDays:
         for e in event:
             if (e.getDate().getDay() == DAY):
