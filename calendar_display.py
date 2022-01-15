@@ -1,12 +1,13 @@
 from colors import colors
-from util import combine, prevMonth, nextMonth, cal, calendar, getMonthName
+from util import combine, getDaysInMonth, prevMonth, nextMonth, cal, calendar, getMonthName
 from time_constants import DAY, MONTH, YEAR
 from events_loader import searchEvent
 
 def getEventLine(line, otherMonth):
+
     x = []
     for i in range(len(line[0])):
-        if (line[1]):
+        if (line[1][i]):
             e = searchEvent(line[0][i], MONTH, YEAR)
         else:
             e = searchEvent(line[0][i], otherMonth, YEAR)
@@ -97,12 +98,15 @@ def displayCalendar():
 
     #get list of events in the calendar
     prevEventLine = getEventLine(prevLine, prevMonth())
+
     if (DAY <= 7):
         presentEventLine = getEventLine(line, prevMonth())
-    else:
+    elif (DAY >= getDaysInMonth(MONTH, YEAR)-7):
         presentEventLine = getEventLine(line, nextMonth())
+    else:
+        presentEventLine = getEventLine(line, MONTH)
 
-    nextEventLine = getEventLine(nextLine, nextMonth())
+    nextEventLine = getEventLine(nextLine, 12)
 
 
     #Actually display the calendar

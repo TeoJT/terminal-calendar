@@ -52,7 +52,7 @@ def getDaysInMonth(month, year):
 def processDay(day, month, year):
     daysInMonth = getDaysInMonth(month, year)
     if (day > daysInMonth):
-        day -= daysInMonth-1
+        day -= daysInMonth
         month += 1
 
     if (month > 12):

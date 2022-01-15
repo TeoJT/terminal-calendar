@@ -1,11 +1,11 @@
-from util import calendar, nextMonth
+from util import calendar, getDaysInMonth, nextMonth
 from time_constants import DAY, MONTH, YEAR, HOUR, MINUTE, SECOND
 from events_loader import searchEvent
 from colors import colors
 from EventRecord import EventRecord
 from datetime import datetime
 
-EVENTS_DISPLAY_RANGE  = 5
+EVENTS_DISPLAY_RANGE  = 7
 EVENTS_DISPLAY_LENGTH = 50
 
 
@@ -15,9 +15,9 @@ def getUpcomingEvents(dayRange):
     currentYear = YEAR
 
     eventsList = []
-    daysInMonth = calendar.monthrange(YEAR, currentMonth)[1]
-    for i in range(0, dayRange, 1):
-        day = currentDay+i
+    daysInMonth = getDaysInMonth(currentMonth,YEAR)
+    for i in range(1, dayRange, 1):
+        day = currentDay+i-1
         eventsList += [searchEvent(day, currentMonth, currentYear)]
         #print(searchEvent(day, currentMonth, currentYear))
         if (day > daysInMonth):
@@ -25,7 +25,7 @@ def getUpcomingEvents(dayRange):
             currentMonth = nextMonth(currentMonth)
             if (currentMonth == 1):
                 currentYear += 1 
-            daysInMonth = calendar.monthrange(currentYear, currentMonth)[1]
+            daysInMonth = getDaysInMonth(currentMonth, currentYear)
     return eventsList
 
 def getTimeUntil(e):
