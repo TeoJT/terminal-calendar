@@ -1,5 +1,6 @@
 from datetime import datetime
 
+# DEPRICATED
 time = datetime.now()
 DAY   = time.day
 MONTH = time.month
@@ -9,8 +10,29 @@ HOUR   = time.hour
 MINUTE = time.minute
 SECOND = time.second
 
+# new
+def day():
+    return datetime.now().day
+
+def month():
+    return datetime.now().month
+    
+def year():
+    return datetime.now().year
+    
+def hour():
+    return datetime.now().hour
+    
+def minute():
+    return datetime.now().minute
+    
+def second():
+    return datetime.now().second
+    
 
 
 
-# MONTH = 7
-# YEAR = 2021
+
+
+# month() = 7
+# year() = 2021
