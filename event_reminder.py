@@ -10,12 +10,12 @@ EVENTS_DISPLAY_LENGTH = 50
 
 
 def getUpcomingEvents(dayRange):
-    currentDay = DAY
-    currentMonth = MONTH
-    currentYear = YEAR
+    currentDay = DAY()
+    currentMonth = MONTH()
+    currentYear = YEAR()
 
     eventsList = []
-    daysInMonth = getDaysInMonth(currentMonth,YEAR)
+    daysInMonth = getDaysInMonth(currentMonth,YEAR())
     for i in range(1, dayRange, 1):
         day = currentDay+i-1
         eventsList += [searchEvent(day, currentMonth, currentYear)]
@@ -37,7 +37,7 @@ def getTimeUntil(e):
     future = datetime(dt.getYear(), dt.getMonth(), dt.getDay(), tt.getHour(), tt.getMin(), 00)
 
     #Use the current time to get the current time
-    now = datetime(YEAR, MONTH, DAY, HOUR, MINUTE, SECOND)
+    now = datetime(YEAR(), MONTH(), DAY(), HOUR(), MINUTE(), SECOND())
 
     #And get the time between the future and the current date.
     dur = int((future-now).total_seconds())
@@ -63,7 +63,7 @@ def displayEvent(e):
     daysUntil, hoursUntil, minutesUntil = getTimeUntil(e)
 
     #Header
-    if (e.getDate().getDay() == DAY):
+    if (e.getDate().getDay() == DAY()):
         print(colors.EVENT_NOW + generateHeader("TODAY: ",e) + colors.NONE)
     elif (daysUntil == 0):
         print(colors.EVENT_SOON+ generateHeader("TOMORROW: ",e) + colors.NONE)
@@ -79,11 +79,11 @@ def displayEvent(e):
     #d = ""
     
     #How long until it is until the event
-    if ((minutesUntil < 0 or hoursUntil < 0) and e.getDate().getDay() == DAY):
+    if ((minutesUntil < 0 or hoursUntil < 0) and e.getDate().getDay() == DAY()):
         print(colors.GOLD+colors.UNDERLINE+"ON NOW!"+colors.NONE)
     elif (daysUntil < 0 or hoursUntil < 0 or minutesUntil < 0):
         print(colors.GREY+"Past event."+colors.NONE)
-    elif (e.getDate().getDay() == DAY):
+    elif (e.getDate().getDay() == DAY()):
         print(colors.RED+str(hoursUntil)  + " hours, " + str(minutesUntil) + " minutes"+colors.NONE)
     elif (daysUntil < 2):
         print(colors.PURPLE+str(daysUntil)  + " days, " + str(hoursUntil) + " hours, " + str(minutesUntil) + " minutes"+colors.NONE)
@@ -91,7 +91,7 @@ def displayEvent(e):
         print(colors.WHITE+str(daysUntil) + " days"+colors.NONE)
 
     eventPassed = False
-    if ((daysUntil < 0 or hoursUntil < 0 or minutesUntil < 0) and e.getDate().getDay() != DAY):
+    if ((daysUntil < 0 or hoursUntil < 0 or minutesUntil < 0) and e.getDate().getDay() != DAY()):
         print(colors.BOLD+colors.GOLD+"WARNING: This event is set in the past, you should make sure the time is correct."+colors.NONE)
         eventPassed = True
     print()
@@ -102,8 +102,8 @@ def displayUpcomingEvents(eventRange=EVENTS_DISPLAY_RANGE):
     eventDays = getUpcomingEvents(eventRange)
     for event in eventDays:
         for e in event:
-            if (e.getDate().getDay() == DAY):
-                if (HOUR <= e.getEnd().getHour() ):
+            if (e.getDate().getDay() == DAY()):
+                if (HOUR() <= e.getEnd().getHour() ):
                     displayEvent(e)
             else:
                displayEvent(e)

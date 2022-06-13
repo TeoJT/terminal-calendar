@@ -67,7 +67,7 @@ def loadFromCSV():
 #Test add record
 def testSavingRecord():
     # name  =  "terncode is horny"
-    # date  =  DateRecord().setDate(DAY+1, MONTH, YEAR)
+    # date  =  DateRecord().setDate(DAY()+1, MONTH(), YEAR())
     # start =  TimeRecord().setTime(11, 30)
     # end   =  TimeRecord().setTime(12, 00)
     # record = {"name":name, "date":date.getDate(), "start":start.getTime(), "end":end.getTime()}

@@ -2,31 +2,25 @@ from datetime import datetime
 
 # DEPRICATED
 time = datetime.now()
-DAY   = time.day
-MONTH = time.month
-YEAR  = time.year
 
-HOUR   = time.hour
-MINUTE = time.minute
-SECOND = time.second
 
 # new
-def day():
+def DAY():
     return datetime.now().day
 
-def month():
+def MONTH():
     return datetime.now().month
     
-def year():
+def YEAR():
     return datetime.now().year
     
-def hour():
+def HOUR():
     return datetime.now().hour
     
-def minute():
+def MINUTE():
     return datetime.now().minute
     
-def second():
+def SECOND():
     return datetime.now().second
     
 

@@ -2,7 +2,7 @@ import calendar
 from time_constants import DAY, MONTH, YEAR
 
 #Get the weeks of the month, which contain the days of the month
-cal = calendar.monthcalendar(YEAR, MONTH)
+cal = calendar.monthcalendar(YEAR(), MONTH())
 
 monthNames = ("January",
               "February",
@@ -20,13 +20,13 @@ monthNames = ("January",
 def getMonthName(index):
     return monthNames[index-1]
 
-def prevMonth(startingMonth = MONTH):
+def prevMonth(startingMonth = MONTH()):
     m = startingMonth-1
     if (m < 1):
         m = 12
     return m
 
-def nextMonth(startingMonth = MONTH):
+def nextMonth(startingMonth = MONTH()):
     m = startingMonth+1
     if (m > 12):
         m = 1

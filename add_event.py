@@ -47,21 +47,21 @@ def addEvent(name, date, start, end):
             date = copy.copy(name)
             name = input("Enter new name:\n")
     
-    month = MONTH
-    year = YEAR
+    month = MONTH()
+    year = YEAR()
     if (date == "today"):
-        day = DAY
+        day = DAY()
         date = setDay(day, month, year)
     elif (date == "t" or date == "tomorrow"):
-        day, month, year = processDay(DAY+1, MONTH, YEAR)
+        day, month, year = processDay(DAY()+1, MONTH(), YEAR())
         date = setDay(day, month, year)
     elif (len(date) == 1):
-        day, month, year = processDay(DAY+int(date), MONTH, YEAR)
+        day, month, year = processDay(DAY()+int(date), MONTH(), YEAR())
         date = setDay(day, month, year)
     elif (len(date) == 2):
         day = int(date)
-        if (day < DAY):
-            day, month, year = processDay(day, MONTH+1, YEAR)
+        if (day < DAY()):
+            day, month, year = processDay(day, MONTH()+1, YEAR())
         date = setDay(day, month, year)
     
 
