@@ -29,5 +29,3 @@ Close the file with ctrl+X and then restart your terminal. You should now see th
 - Fix a few unstabilities like events being appended to an already existing line instead of a new line.
 - Remove old events from the past to preserve performance when reading the csv file.
 - Add a config.json file to modify configurations.
-- Add undo command.
-- Improve addEvent to make it more automated and reduce chances of errors.
