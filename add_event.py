@@ -101,7 +101,7 @@ def addEvent(name, date, start, end):
         #Check if event is in the past.
         IN_THE_PAST = True
         if (displayEvent(event) == IN_THE_PAST):
-            if (confirm("This event is set in the past.\nAre you sure you set the right date/time? y/n\n")):
+            if (not confirm("This event is set in the past.\nAre you sure you set the right date/time? y/n\n")):
                 print(colors.GOLD+"Add event cancelled."+colors.NONE)
                 return
 
